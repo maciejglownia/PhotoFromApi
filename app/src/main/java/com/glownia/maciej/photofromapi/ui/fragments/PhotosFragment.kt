@@ -1,4 +1,4 @@
-package com.glownia.maciej.photofromapi.ui.main
+package com.glownia.maciej.photofromapi.ui.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.glownia.maciej.photofromapi.R
+import com.glownia.maciej.photofromapi.ui.viewmodels.MainViewModel
 
 class PhotosFragment : Fragment() {
 

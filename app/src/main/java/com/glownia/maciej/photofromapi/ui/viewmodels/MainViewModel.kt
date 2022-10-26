@@ -1,4 +1,4 @@
-package com.glownia.maciej.photofromapi.ui.main
+package com.glownia.maciej.photofromapi.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 

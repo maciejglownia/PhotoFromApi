@@ -1,8 +1,9 @@
-package com.glownia.maciej.photofromapi
+package com.glownia.maciej.photofromapi.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.glownia.maciej.photofromapi.ui.main.PhotosFragment
+import com.glownia.maciej.photofromapi.R
+import com.glownia.maciej.photofromapi.ui.fragments.PhotosFragment
 
 class MainActivity : AppCompatActivity() {
 
