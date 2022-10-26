@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.glownia.maciej.photofromapi.R
 
-class MainFragment : Fragment() {
+class PhotosFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = PhotosFragment()
     }
 
     private lateinit var viewModel: MainViewModel
@@ -26,7 +26,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_photos, container, false)
     }
 
 }
