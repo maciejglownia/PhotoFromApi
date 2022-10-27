@@ -10,13 +10,13 @@ import javax.inject.Singleton
 @Singleton
 class PhotosRepository @Inject constructor(private val photosApi: PhotosApi) {
 
-    fun getPhotosResults() =
+    fun getSearchResults(query: String) =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { PhotosPagingSource(photosApi) }
+            pagingSourceFactory = { PhotosPagingSource(photosApi, query) }
         ).liveData
 }

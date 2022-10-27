@@ -8,14 +8,15 @@ import java.io.IOException
 private const val PHOTOS_STARTING_PAGE_INDEX = 1
 
 class PhotosPagingSource(
-    private val photosApi: PhotosApi
+    private val photosApi: PhotosApi,
+    private val query: String
 ) : PagingSource<Int, Photo>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         val position = params.key ?: PHOTOS_STARTING_PAGE_INDEX
 
         return try {
-            val response = photosApi.getPhotos(position, params.loadSize)
+            val response = photosApi.getPhotos(query, position, params.loadSize)
             val photos = response.results
 
             LoadResult.Page(

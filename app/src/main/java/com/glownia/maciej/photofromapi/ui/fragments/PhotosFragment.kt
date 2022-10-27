@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.glownia.maciej.photofromapi.R
 import com.glownia.maciej.photofromapi.databinding.FragmentPhotosBinding
 import com.glownia.maciej.photofromapi.ui.adapters.PhotoAdapter
 import com.glownia.maciej.photofromapi.ui.viewmodels.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhotosFragment : Fragment() {
+class PhotosFragment : Fragment(R.layout.fragment_photos) {
 
     private val viewModel by viewModels<PhotosViewModel>()
 
@@ -25,7 +26,7 @@ class PhotosFragment : Fragment() {
         val adapter = PhotoAdapter()
         binding.apply {
             recyclerView.setHasFixedSize(true)
-            recyclerView.adapter
+            recyclerView.adapter = adapter
         }
 
         viewModel.photos.observe(viewLifecycleOwner) {

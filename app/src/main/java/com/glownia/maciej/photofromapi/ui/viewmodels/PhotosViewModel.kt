@@ -1,6 +1,8 @@
 package com.glownia.maciej.photofromapi.ui.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.glownia.maciej.photofromapi.data.PhotosRepository
@@ -12,9 +14,17 @@ class PhotosViewModel @Inject constructor(
     private val repository: PhotosRepository
 ) : ViewModel() {
 
-    val photos = repository.getPhotosResults()
+    private val currentQuery = MutableLiveData(DEFAULT_QUERY)
 
-    fun getPhotos() {
-        repository.getPhotosResults().cachedIn(viewModelScope)
+    val photos = currentQuery.switchMap { queryString ->
+        repository.getSearchResults(queryString).cachedIn(viewModelScope)
+    }
+
+    fun searchPhotos(query: String) {
+        currentQuery.value = query
+    }
+
+    companion object {
+        private const val DEFAULT_QUERY = "clothes"
     }
 }
