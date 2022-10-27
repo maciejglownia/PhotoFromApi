@@ -1,35 +1,22 @@
 package com.glownia.maciej.photofromapi.ui.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.glownia.maciej.photofromapi.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.glownia.maciej.photofromapi.ui.viewmodels.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PhotosFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PhotosFragment()
+    private val viewModel by viewModels<PhotosViewModel>()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.photos.observe(viewLifecycleOwner) {
+
+        }
     }
-
-    private lateinit var viewModel: PhotosViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PhotosViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_photos, container, false)
-    }
-
 }
