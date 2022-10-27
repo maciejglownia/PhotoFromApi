@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.glownia.maciej.photofromapi.R
-import com.glownia.maciej.photofromapi.ui.viewmodels.MainViewModel
+import com.glownia.maciej.photofromapi.ui.viewmodels.PhotosViewModel
 
 class PhotosFragment : Fragment() {
 
@@ -15,11 +15,11 @@ class PhotosFragment : Fragment() {
         fun newInstance() = PhotosFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: PhotosViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PhotosViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
