@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.glownia.maciej.photofromapi.R
 import com.glownia.maciej.photofromapi.ui.viewmodels.PhotosViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PhotosFragment : Fragment() {
 
     companion object {
