@@ -25,6 +25,6 @@ class PhotosViewModel @Inject constructor(
     }
 
     companion object {
-        private const val DEFAULT_QUERY = "clothes"
+        private const val DEFAULT_QUERY = "house"
     }
 }

@@ -8,8 +8,9 @@ data class Photo(
     val id: String,
     val description: String?,
     val likes: Int,
+    val color: String,
     val urls: PhotoUrls,
-    val user: UnsplashUser
+    val user: PhotoUser
 ) : Parcelable {
 
     @Parcelize
@@ -22,7 +23,7 @@ data class Photo(
     ) : Parcelable
 
     @Parcelize
-    data class UnsplashUser(
+    data class PhotoUser(
         val name: String,
         val username: String
     ) : Parcelable {

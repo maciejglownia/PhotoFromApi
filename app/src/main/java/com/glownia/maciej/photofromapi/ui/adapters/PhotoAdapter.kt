@@ -1,5 +1,6 @@
 package com.glownia.maciej.photofromapi.ui.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -41,9 +42,16 @@ class PhotoAdapter :
                     .error(R.drawable.ic_error)
                     .into(imageViewPhoto)
 
-                textViewDescription.text = photo.description
                 textViewUsername.text = photo.user.username
+                if (photo.description == null) {
+                    val noDescription = "No description"
+                    textViewDescription.text = noDescription
+                } else {
+                    textViewDescription.text = photo.description
+                }
                 textViewLikes.text = photo.likes.toString()
+                // This is a way to change square color programmatically
+                imageViewPaletteColor.setColorFilter(Color.parseColor(photo.color))
             }
         }
     }
