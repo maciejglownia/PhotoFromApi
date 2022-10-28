@@ -5,6 +5,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -15,7 +17,6 @@ import com.glownia.maciej.photofromapi.databinding.FragmentPhotosBinding
 import com.glownia.maciej.photofromapi.ui.adapters.PhotoAdapter
 import com.glownia.maciej.photofromapi.ui.adapters.PhotoLoadStateAdapter
 import com.glownia.maciej.photofromapi.ui.viewmodels.PhotosViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,18 +36,24 @@ class PhotosFragment : Fragment(R.layout.fragment_photos) {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.search_icon -> {
-                        Snackbar.make(view, "Search icon works!", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show()
-                        true
+                val searchView = menuItem.actionView as SearchView
+                searchView.setOnQueryTextListener(object : OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        if (query != null) {
+                            binding.recyclerView.scrollToPosition(0)
+                            viewModel.searchPhotos(query)
+                            searchView.clearFocus()
+                        }
+                        return true
                     }
-                    else -> false
-                }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        return true
+                    }
+                })
+                return true
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-        super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentPhotosBinding.bind(view)
 
