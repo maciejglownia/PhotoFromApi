@@ -49,7 +49,8 @@ class PhotoAdapter :
                 } else {
                     textViewDescription.text = photo.description
                 }
-                textViewLikes.text = photo.likes.toString()
+                textViewLike.text = photo.likes.toString()
+                textViewUnlike.text = "0" // now only for UI. Able to set up when data is available
                 // This is a way to change square color programmatically
                 imageViewPaletteColor.setColorFilter(Color.parseColor(photo.color))
             }
