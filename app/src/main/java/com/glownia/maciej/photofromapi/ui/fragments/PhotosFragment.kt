@@ -13,8 +13,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.glownia.maciej.photofromapi.R
+import com.glownia.maciej.photofromapi.data.Photo
 import com.glownia.maciej.photofromapi.databinding.FragmentPhotosBinding
 import com.glownia.maciej.photofromapi.ui.adapters.PhotoAdapter
 import com.glownia.maciej.photofromapi.ui.adapters.PhotoLoadStateAdapter
@@ -22,7 +24,7 @@ import com.glownia.maciej.photofromapi.ui.viewmodels.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhotosFragment : Fragment(R.layout.fragment_photos) {
+class PhotosFragment : Fragment(R.layout.fragment_photos), PhotoAdapter.OnItemClickListener {
 
     private val viewModel by viewModels<PhotosViewModel>()
 
@@ -59,7 +61,7 @@ class PhotosFragment : Fragment(R.layout.fragment_photos) {
 
         _binding = FragmentPhotosBinding.bind(view)
 
-        val adapter = PhotoAdapter()
+        val adapter = PhotoAdapter(this)
         binding.apply {
             recyclerView.setHasFixedSize(true)
             recyclerView.itemAnimator = null
@@ -84,16 +86,22 @@ class PhotosFragment : Fragment(R.layout.fragment_photos) {
                 buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
                 textViewError.isVisible = loadState.source.refresh is LoadState.Error
 
-            if (loadState.source.refresh is LoadState.NotLoading &&
+                if (loadState.source.refresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached &&
-                    adapter.itemCount < 1) {
-                recyclerView.isVisible = false
-                textViewEmpty.isVisible = true
-            } else {
-                textViewEmpty.isVisible = false
-            }
+                    adapter.itemCount < 1
+                ) {
+                    recyclerView.isVisible = false
+                    textViewEmpty.isVisible = true
+                } else {
+                    textViewEmpty.isVisible = false
+                }
             }
         }
+    }
+
+    override fun onItemClick(photo: Photo) {
+        val action = PhotosFragmentDirections.actionPhotosFragmentToSinglePhotoFragment(photo)
+        findNavController().navigate(action)
     }
 
     override fun onDestroy() {

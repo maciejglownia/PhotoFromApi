@@ -9,5 +9,18 @@
         android:id="@+id/photosFragment"
         android:name="com.glownia.maciej.photofromapi.ui.fragments.PhotosFragment"
         android:label="fragment_photos"
-        tools:layout="@layout/fragment_photos" />
+        tools:layout="@layout/fragment_photos" >
+        <action
+            android:id="@+id/action_photosFragment_to_singlePhotoFragment"
+            app:destination="@id/singlePhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singlePhotoFragment"
+        android:name="com.glownia.maciej.photofromapi.ui.fragments.SinglePhotoFragment"
+        android:label="fragment_single_photo"
+        tools:layout="@layout/fragment_single_photo" >
+        <argument
+            android:name="photo"
+            app:argType="com.glownia.maciej.photofromapi.data.Photo" />
+    </fragment>
 </navigation>
