@@ -12,7 +12,7 @@ import com.glownia.maciej.photofromapi.R
 import com.glownia.maciej.photofromapi.data.Photo
 import com.glownia.maciej.photofromapi.databinding.ListViewItemBinding
 
-class PhotoAdapter :
+class PhotoAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<Photo, PhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) { // PagingDataAdapter -> knows how to handle paging data
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
@@ -29,8 +29,21 @@ class PhotoAdapter :
         }
     }
 
-    class PhotoViewHolder(private val binding: ListViewItemBinding) :
+    inner class PhotoViewHolder(private val binding: ListViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        // Can't to handle navigation from inside the adapter -> create an interface OnItemClickListener below
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
 
         fun bind(photo: Photo) {
             binding.apply {
@@ -55,6 +68,10 @@ class PhotoAdapter :
                 imageViewPaletteColor.setColorFilter(Color.parseColor(photo.color))
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(photo: Photo)
     }
 
     companion object {
