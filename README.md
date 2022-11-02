@@ -31,6 +31,7 @@ User is able to:
 ### Thank you
 - [Florian Walther](https://codinginflow.com/)
 - [Philipp Lackner](https://pl-coding.com/)
+- [Miro - architecture diagram](https://miro.com/)
 
 ### Dear Visitor
 If you see an opportunity to improve my code do not hesitate to contact me:
