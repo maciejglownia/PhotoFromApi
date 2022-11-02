@@ -28,6 +28,10 @@ User is able to:
 3. Go to the author's profile by clicking on the author's name as link, 
 4. Search for other photos using searching bar, e.g guitar, mountain,
 
+### Thank you
+- [Florian Walther](https://codinginflow.com/)
+- [Philipp Lackner](https://pl-coding.com/)
+
 ### Dear Visitor
 If you see an opportunity to improve my code do not hesitate to contact me:
 maciej.k.glownia@gmail.com. If you want to copy it and develop with your own idea, take it and enjoy
