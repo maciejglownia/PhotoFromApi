@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/photosFragment"
         android:name="com.glownia.maciej.photofromapi.ui.fragments.PhotosFragment"
-        android:label="Photos From API"
+        android:label="Photos"
         tools:layout="@layout/fragment_photos">
         <action
             android:id="@+id/action_photosFragment_to_singlePhotoFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/singlePhotoFragment"
         android:name="com.glownia.maciej.photofromapi.ui.fragments.SinglePhotoFragment"
-        android:label="Photo"
+        android:label="Photo Details"
         tools:layout="@layout/fragment_single_photo">
         <argument
             android:name="photo"
