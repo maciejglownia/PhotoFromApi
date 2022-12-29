@@ -1,5 +1,6 @@
 package com.glownia.maciej.photofromapi.ui.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -63,13 +64,34 @@ class SinglePhotoFragment : Fragment(R.layout.fragment_single_photo) {
             val intent = Intent(Intent.ACTION_VIEW, uri)
 
             textViewUsername.apply {
-                text = "Photo by ${photo.user.name}"
+                val textToDisplay = "Photo by ${photo.user.name}"
+                text = textToDisplay
                 setOnClickListener {
-                    context.startActivity(intent)
+                    showDialogToAskUserIfWantsToGoToSeePhotosOwnerProfile(intent)
                 }
                 paint.isUnderlineText = true
             }
-
         }
+    }
+    // Need this method to let user decide to go to website or stay in the application
+    private fun showDialogToAskUserIfWantsToGoToSeePhotosOwnerProfile(intent: Intent) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Dear User!") // About application
+        builder.setMessage(
+            "If you want to visit the website profile of the owner of this photo, click on ''Go''." +
+                    "\nIf you want to stay in the app click on ''Stay''."
+        )
+        builder.setPositiveButton("Go")
+        { dialogInterface, _ ->
+            dialogInterface.dismiss()
+            requireContext().startActivity(intent)
+        }
+        builder.setNegativeButton("Stay")
+        { dialogInterface, _ ->
+            dialogInterface.dismiss()
+        }
+        val appDescription: AlertDialog = builder.create()
+        appDescription.setCancelable(false)
+        appDescription.show()
     }
 }
